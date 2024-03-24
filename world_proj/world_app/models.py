@@ -11,6 +11,8 @@ class City(models.Model):
     class Meta:
         managed = False
         db_table = 'city'
+    def __str__(self):
+        return self.name
 
 
 class Country(models.Model):
@@ -33,6 +35,8 @@ class Country(models.Model):
     class Meta:
         managed = False
         db_table = 'country'
+    def __str__(self):
+        return self.name
 
 
 class Countrylanguage(models.Model):
@@ -45,3 +49,5 @@ class Countrylanguage(models.Model):
         managed = False
         db_table = 'countrylanguage'
         unique_together = (('countrycode', 'language'),)
+    def __str__(self):
+        return self.language

@@ -1,15 +1,17 @@
 <!--<div style="text-align:center"><h1>Hello, World!</h1>
 <h2>This is just a test.</h2></div>
 -->
-
-
+{% load attr_filter %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic Table UI</title>
+  <title>Database Table</title>
   <style>
+    body{
+        background-color:#E0F4FF
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -21,46 +23,31 @@
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#">Home</a>
+  <div style="text-align:center">
+    <nav>
+        <a href="admin" target="_blank">Admin Page</a>
+        <br>
     </nav>
-  <input type="search" placeholder="Search">
+    <input type="search" placeholder="Search">
+    <input type="button" value="Search!">
+  </div>
+  <h1>Table 1:City</h1>
   <table>
     <thead>
-      <tr>
-        <th>#</th>
-        <th>StudentID</th>
-        <th>First</th>
-        <th>Last</th>
-        <th>City</th>
-        <th>Address</th>
-      </tr>
+        <tr>
+            {% for i in country_attributes %}<!--This is Django template language-->
+                <th>{{i}}</th>
+            {% endfor %}
+        </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>@fat</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-      </tr>
+        {% for c in country %}
+            <tr>
+                {% for i in country_attributes %}
+                    <td>{{ c|get_attr:i }}</td><!--For this ,refer to the attr_filter.py file in templatetags folder-->
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </tbody>
   </table>
 </body>
