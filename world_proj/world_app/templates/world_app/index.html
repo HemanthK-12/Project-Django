@@ -1,6 +1,3 @@
-<!--<div style="text-align:center"><h1>Hello, World!</h1>
-<h2>This is just a test.</h2></div>
--->
 {% load attr_filter %}
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +25,33 @@
         <a href="admin" target="_blank">Admin Page</a>
         <br>
     </nav>
-    <input type="search" placeholder="Search">
-    <input type="button" value="Search!">
+    <form method="GET" action=".">
+        <input type="search" name="query" placeholder="Search">
+        <input type="submit" value="Search!">
+    </form>
   </div>
+  {% if query == "city" %}
   <h1>Table 1:City</h1>
+  <table>
+    <thead>
+        <tr>
+            {% for i in city_attributes %}<!--This is Django template language-->
+                <th>{{i}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in city %}
+            <tr>
+                {% for i in city_attributes %}
+                    <td>{{ c|get_attr:i }}</td><!--For this ,refer to the attr_filter.py file in templatetags folder-->
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  {%elif query == "country"%}
+  <h1>Table 2:Country</h1>
   <table>
     <thead>
         <tr>
@@ -50,6 +70,29 @@
         {% endfor %}
     </tbody>
   </table>
+  {%elif query == "countrylanguage"%}
+  <h1>Table 3:Country Language</h1>
+  <table>
+    <thead>
+        <tr>
+            {% for i in countrylanguage_attributes %}<!--This is Django template language-->
+                <th>{{i}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in countrylanguage %}
+            <tr>
+                {% for i in countrylanguage_attributes %}
+                    <td>{{ c|get_attr:i }}</td><!--For this ,refer to the attr_filter.py file in templatetags folder-->
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  {%else%}
+  {%endif%}
+
 </body>
 </html>
 
